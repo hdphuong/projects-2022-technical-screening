@@ -45,6 +45,7 @@ const altNumbers = (numArray) => {
     return result;
 }
 
+
 module.exports = { altNumbers } // Do not modify this line
 
 // ====================TESTS====================
