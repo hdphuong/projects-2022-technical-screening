@@ -1,4 +1,7 @@
 var assert = require("assert")
+const { DH_NOT_SUITABLE_GENERATOR } = require("constants");
+const { maxHeaderSize } = require("http");
+const { resourceLimits } = require("worker_threads");
 // Given an array of numbers, return a new array so that positive and negative
 // numbers alternate. You can assume that 0 is a positive number. Within the
 // positive and negative numbers, you must keep their relative order. You are 
@@ -31,8 +34,15 @@ var assert = require("assert")
 // Explanation: Empty array...
 
 const altNumbers = (numArray) => {
-    // TODO: COMPLETE THIS FUNCTION
-    return [];
+    let pos = [], neg = [], result = [];
+    numArray.map((n) => {n >= 0 ? pos.push(n) : neg.push(n)});
+
+    let [longer, shorter] = pos.length > neg.length ? [pos, neg] : [neg, pos];
+
+    for (let i = 0; i < numArray.length; i++) {
+        i % 2 == 0 ? result.push(longer.shift()) : result.push(shorter.shift()); 
+    }
+    return result;
 }
 
 module.exports = { altNumbers } // Do not modify this line
