@@ -41,7 +41,6 @@ def processRequirements(requirement):
     return doProcess(requirements)
 
 def doProcess(req):
-
     if len(req) < 1:
         return CourseNode("")
     if len(req) < 2:
@@ -50,7 +49,6 @@ def doProcess(req):
         return CourseNode(req[0])
     if ")" in req[0]:
         return CourseNode(req[0])
-    
 
     curr = req[0]
     nodes = []
@@ -150,10 +148,7 @@ class CourseNode(BaseNode):
         str = self.name.strip("(").strip(")").strip(",").upper()
         if re.search(r"^[0-9]{4}$", str):
             str = "COMP" + str
-        if str in courseList:
-            return True
-        else:
-            return False
+        return str in courseList
 
 class AndNode(BaseNode):
     def __init__(self, nodes):
@@ -190,11 +185,9 @@ class NumberNode(BaseNode):
             return len([c for c in courseList if c[4] == str(self.level)])*6 >= self.num
 
 
-
   #######################################
  ###             MAIN                ###
 #######################################
-
 if __name__ == "__main__":
     assert is_unlocked([], "COMP1511") == True
     assert is_unlocked([], "COMP9301") == False
