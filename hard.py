@@ -69,6 +69,8 @@ def doProcess(req):
                 nodes.append(doProcess(newReq))
 
             elif ")" in req[i] and i != len(req) - 1:
+                if layer == 0:
+                    nodes.append(CourseNode(req[i:]))
                 layer -= req[i].count(")")
 
             elif re.search(r'[0-9]{4}', req[i]) and layer <= 0:
