@@ -76,7 +76,7 @@ def doProcess(req):
             elif re.search(r'[0-9]{4}', req[i]) and layer <= 0:
                 nodes.append(CourseNode(req[i]))
 
-            elif re.search(r'^[0-9]{1,3}$', req[i]):
+            elif re.search(r'^[0-9]{2,3}$', req[i]):
                 nodes.append(doProcess(req[i:]))
             else:
                 logic = req[i] if layer <= 0 else logic
@@ -96,7 +96,7 @@ def doProcess(req):
         nodes.append(doProcess(req[1:]))
         return AndNode(nodes)
 
-    elif re.search(r"^[0-9]{1,3}$", curr) != None:
+    elif re.search(r"^[0-9]{2,3}$", curr) != None:
         return createNumberNode(req, nodes = [])
 
     return CourseNode(curr)
